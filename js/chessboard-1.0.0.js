@@ -1650,6 +1650,8 @@
 
     var throttledMousemoveWindow = throttle(mousemoveWindow, config.dragThrottleRate)
 
+    var throttledUpdateDraggedPiece = throttle(updateDraggedPiece, config.dragThrottleRate)
+
     function touchmoveWindow (evt) {
       // do nothing if we are not dragging a piece
       if (!isDragging) return
@@ -1657,11 +1659,9 @@
       // prevent screen from scrolling
       evt.preventDefault()
 
-      updateDraggedPiece(evt.originalEvent.changedTouches[0].pageX,
+      throttledUpdateDraggedPiece(evt.originalEvent.changedTouches[0].pageX,
         evt.originalEvent.changedTouches[0].pageY)
     }
-
-    var throttledTouchmoveWindow = throttle(touchmoveWindow, config.dragThrottleRate)
 
     function mouseupWindow (evt) {
       // do nothing if we are not dragging a piece
@@ -1760,7 +1760,7 @@
         $board.on('touchstart', '.' + CSS.square, touchstartSquare)
         $container.on('touchstart', '.' + CSS.sparePieces + ' .' + CSS.piece, touchstartSparePiece)
         $window
-          .on('touchmove', throttledTouchmoveWindow)
+          .on('touchmove', touchmoveWindow)
           .on('touchend', touchendWindow)
       }
     }
