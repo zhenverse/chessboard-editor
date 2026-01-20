@@ -82,6 +82,7 @@
     <script>
         // Initial configuration
         var historyStack = [];
+        var HISTORY_LIMIT = 10000;
         var isReverting = false;
         var config = {
             draggable: true,      // Allow dragging
@@ -97,6 +98,9 @@
                 }
 
                 historyStack.push(oldPos);
+                if (historyStack.length > HISTORY_LIMIT) {
+                    historyStack.shift();
+                }
                 return;
             }
         };
