@@ -52,3 +52,25 @@
   top: 2px;
   left: 2px;
 }
+
+
+img[src*="bP.png"], img[src*="bK.png"], img[src*="bQ.png"],
+img[src*="bB.png"], img[src*="bN.png"], img[src*="bR.png"],
+img[src*="wP.png"], img[src*="wK.png"], img[src*="wQ.png"],
+img[src*="wB.png"], img[src*="wN.png"], img[src*="wR.png"] {
+
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9));
+
+  transition: filter 0.2s ease;
+}
+
+
+div[class*="square-"] img[src*="bP.png"], div[class*="square-"] img[src*="bK.png"],
+div[class*="square-"] img[src*="bQ.png"], div[class*="square-"] img[src*="bB.png"],
+div[class*="square-"] img[src*="bN.png"], div[class*="square-"] img[src*="bR.png"],
+div[class*="square-"] img[src*="wP.png"], div[class*="square-"] img[src*="wK.png"],
+div[class*="square-"] img[src*="wQ.png"], div[class*="square-"] img[src*="wB.png"],
+div[class*="square-"] img[src*="wN.png"], div[class*="square-"] img[src*="wR.png"] {
+
+  filter: none;
+}
