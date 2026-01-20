@@ -70,9 +70,10 @@
     <div id="board"></div>
 
     <div class="controls">
-        <button id="startBtn">Start Position</button>
-        <button id="clearBtn">Clear Board</button>
-        <button id="flipBtn">Flip Board</button>
+        <button id="startBtn">Start</button>
+        <button id="clearBtn">Clear</button>
+        <button id="flipBtn">Flip</button>
+        <button id="revertBtn">Revert</button>
     </div>
 
     <script src="js/jquery.min.js"></script>
@@ -80,21 +81,43 @@
 
     <script>
         // Initial configuration
+        var historyStack = [];
+        var isReverting = false;
         var config = {
             draggable: true,      // Allow dragging
             dropOffBoard: 'trash', // Delete when dropped off board
             sparePieces: true,     // Show spare pieces (unlimited)
             position: 'start',     // Start position
             showNotation: true,    // Show notation (a-h, 1-8)
+            onChange: function(oldPos, newPos){
+
+                if(isReverting) {
+                    isReverting = false;
+                    return;
+                }
+
+                historyStack.push(oldPos);
+                return;
+            }
         };
 
         // Create board instance
         var board = Chessboard('board', config);
 
         // Button event listeners
-        $('#startBtn').on('click', board.start);
+        $('#startBtn').on('click', function(){
+            board.start();
+        });
         $('#clearBtn').on('click', board.clear);
         $('#flipBtn').on('click', board.flip);
+        $('#revertBtn').on('click', function(){
+            if(isReverting === false && historyStack.length > 0){
+                isReverting = true;
+                var lastPosition = historyStack.pop();
+                board.position(lastPosition, false);                
+            };
+            return;
+        });
 
         // Adjust board size on window resize
         $(window).resize(board.resize);
