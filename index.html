@@ -113,8 +113,10 @@
         $('#revertBtn').on('click', function(){
             if(isReverting === false && historyStack.length > 0){
                 isReverting = true;
+                $('.animated-piece').stop(true, true).remove();
                 var lastPosition = historyStack.pop();
-                board.position(lastPosition, false);                
+                board.position(board.position(), false);
+                board.position(lastPosition, true);                
             };
             return;
         });

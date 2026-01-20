@@ -917,6 +917,11 @@
       var animatedPieceId = uuid()
       $('body').append(buildPieceHTML(piece, true, animatedPieceId))
       var $animatedPiece = $('#' + animatedPieceId)
+
+      // [CUSTOM] 2026-01-21: Add class to identify flying pieces for revert function
+      // [MOD] Modified by Ray Chien
+      $animatedPiece.addClass('animated-piece')
+      
       $animatedPiece.css({
         display: '',
         position: 'absolute',
@@ -957,6 +962,11 @@
       var pieceId = uuid()
       $('body').append(buildPieceHTML(piece, true, pieceId))
       var $animatedPiece = $('#' + pieceId)
+
+      // [CUSTOM] 2026-01-21: Add class to identify flying pieces for revert function
+      // [MOD] Modified by Ray      
+      $animatedPiece.addClass('animated-piece')
+      
       $animatedPiece.css({
         display: '',
         position: 'absolute',
